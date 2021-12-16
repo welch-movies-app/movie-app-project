@@ -14,8 +14,10 @@ $(document).ready(function(){
             .then(movies => {
                 moviesArr = movies;
                 let htmlStr = '';
+                let htmlStrTwo = '';
                 //Iterates through movies array
                 for(let movie of movies){
+
                     //Creates movie display of posters with title, genre, rating, director
                     htmlStr += `<div class = 'moviePoster'>`
                     htmlStr += `<h1 class = 'title'>${movie.title}</h1>`
@@ -25,9 +27,12 @@ $(document).ready(function(){
                     htmlStr +=  `<div class = 'plot'>Plot: ${movie.plot}</div>`
                     htmlStr += `</div>`
 
+                    //Creates a drop down list of available movies to select and edit
+                    htmlStrTwo += `<option value = ${movie.id}>${movie.title}</option>`
                 }
                 console.log(movies);
                 $('#movie-container').html(htmlStr);
+                $('#movie-drop-down').html(htmlStrTwo)
             });
     }
     moviePoster();
@@ -39,7 +44,7 @@ $(document).ready(function(){
 
     //Once clicked, toggles class to remove input boxes and the ability to input information
     $('#new-movie').click(function(){
-        $('#new-movie-info-form').toggleClass('hidden-info')
+        $('#new-movie-info-form').toggleClass('hidden-info');
     })
 
     //Will create, post, then fetch the new title and rating that the user input
@@ -63,6 +68,19 @@ $(document).ready(function(){
             .then(moviePoster)
             .catch(err => console.log(err))
     })
+
+    //Once clicked, toggles edit form info to allow for user to update movie info
+    $('#update-movie').click(function(){
+        $('#update-movie-info-form').toggleClass('hidden-info');
+    })
+
+    //Once clicked, toggles class to remove input boxes and the ability to update information
+    $('#update-movie-info').click(function(){
+        $('#update-movie-info-form').toggleClass('hidden-info');
+    })
+
+    //Get information about a specific movie post
+
 
 
 
